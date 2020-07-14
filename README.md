@@ -1,29 +1,42 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Desafio LEO Learning ##
 
-### What is this repository for? ###
+### Orientações ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Para o desenvolvimento do projeto deverá ser criado um repositório na conta do bitbucket ou github do candidato com o seguinte nome "desafio_leo"(ex.: http://bitbucket.org/seu_nome/desafio_leo).
+* O desafio deve ser armazenado em seu respectivo repositório.
+* Deve ser evidenciado a evolução do código desenvolvido (commitar sempre).
+* No README deverá ter as informações do desenvolvedor e do projeto.
+* Ao finalizar, enviar e-mail para plataforma@leolearning.com com a url do seu repositório, com o assunto [Desafio LEO] - Finalizado.
+* Mesmo que não tenha finalizado por completo, pode nos enviar como finalizado ao fim do prazo. Temos várias linhas de avaliação.
+* Dê mais atenção a sua melhor skill.
 
-### How do I get set up? ###
+### Front-end ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+O layout deverá respeitar um determinado grid com base no layout e ser acessível em resoluções menores, ex.: notebooks, tablets e smartphones.
+O markup deve ser desenvolvido utilizando HTML5, CSS (sass/less), JS (livre para usar libs, mas seria interessante criar do zero) e automatizador de tarefas (gulp/grunt).
 
-### Contribution guidelines ###
+obs: Os layouts estão no repositório.
 
-* Writing tests
-* Code review
-* Other guidelines
+### Back-end ###
 
-### Who do I talk to? ###
+Deve ser realizado o CRUD para:
+* Cursos.
+* Imagens, título, descrição e link do botão do Slideshow.
 
-* Repo owner or admin
-* Other community or team contact
+##### Modal #####
+
+* Modal deve aparecer somente no primeiro acesso do usuário
+
+##### Atenção! #####
+
+O Desenvolvimento deve ser feito com PHP puro, sem uso de frameworks.
+
+### Prazo ###
+
+O prazo é de 7 dias à partir da data de recebimento.
+
+### Dúvidas ###
+
+Pelo e-mail plataforma@leolearning.com, com o assunto [Desafio LEO] - Dúvidas.
