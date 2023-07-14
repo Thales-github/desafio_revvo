@@ -1,14 +1,14 @@
 # README #
 
-## Desafio LEO Learning ##
+## Desafio Revvo ##
 
 ### Orientações ###
 
-* Para o desenvolvimento do projeto deverá ser criado um repositório na conta do bitbucket ou github do candidato com o seguinte nome "desafio_leo"(ex.: http://bitbucket.org/seu_nome/desafio_leo).
+* Para o desenvolvimento do projeto deverá ser criado um repositório na conta do bitbucket ou github do candidato com o seguinte nome "desafio_revvo"(ex.: http://bitbucket.org/seu_nome/desafio_revvo).
 * O desafio deve ser armazenado em seu respectivo repositório.
 * Deve ser evidenciado a evolução do código desenvolvido (commitar sempre).
 * No README deverá ter as informações do desenvolvedor e do projeto.
-* Ao finalizar, enviar e-mail para plataforma@leolearning.com com a url do seu repositório, com o assunto [Desafio LEO] - Finalizado.
+* Ao finalizar, enviar e-mail para plataformas@somosrevvo.com.br com a url do seu repositório, com o assunto [Desafio Revvo] - Finalizado.
 * Mesmo que não tenha finalizado por completo, pode nos enviar como finalizado ao fim do prazo. Temos várias linhas de avaliação.
 * Dê mais atenção a sua melhor skill.
 
@@ -39,4 +39,4 @@ O prazo é de 7 dias à partir da data de recebimento.
 
 ### Dúvidas ###
 
-Pelo e-mail plataforma@leolearning.com, com o assunto [Desafio LEO] - Dúvidas.
+Pelo e-mail plataformas@somosrevvo.com.br, com o assunto [Desafio Revvo] - Dúvidas.
