@@ -39,4 +39,4 @@ O prazo é de 7 dias à partir da data de recebimento.
 
 ### Dúvidas ###
 
-Pelo e-mail plataformas@somosrevvo.com.br, com o assunto [Desafio Revvo] - Dúvidas.
+Pelo e-mail ricardo.lopes@somosrevvo.com.br, com o assunto [Desafio Revvo] - Dúvidas.
