@@ -11,7 +11,7 @@ class Curso
         return $this->titulo;
     }
 
-    public function setTitulo($titulo)
+    public function setTitulo(mixed $titulo)
     {
         $this->titulo = $titulo;
     }
@@ -21,7 +21,7 @@ class Curso
         return $this->descricao;
     }
 
-    public function setDescricao($descricao)
+    public function setDescricao(mixed $descricao)
     {
         $this->descricao = $descricao;
     }
@@ -31,8 +31,13 @@ class Curso
         return $this->imagem;
     }
 
-    public function setImagem($imagem)
+    public function setImagem(mixed $imagem)
     {
         $this->imagem = $imagem;
+    }
+
+    public function cadastrar(array $parametros) {
+        
+
     }
 }
