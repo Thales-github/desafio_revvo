@@ -1,6 +1,6 @@
 <?php
 
-class Cursos
+class Curso
 {
     private string $titulo;
     private string $descricao;
