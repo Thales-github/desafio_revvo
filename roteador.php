@@ -10,10 +10,10 @@ $classe = $vetor[2];
 $vetor2 = explode("?", $vetor[1]);
 $metodo = $vetor[3];
 
-
-// var_dump($vetor[2]);
 var_dump($classe);
 var_dump($metodo);
+
+
 die();
 // $instancia = new Banco();
 

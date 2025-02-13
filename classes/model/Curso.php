@@ -5,6 +5,7 @@ class Curso
     private string $titulo;
     private string $descricao;
     private mixed $imagem;
+    private array $erros = [];
 
     public function getTitulo()
     {
@@ -36,8 +37,15 @@ class Curso
         $this->imagem = $imagem;
     }
 
-    public function cadastrar(array $parametros) {
-        
-
+    public function getErros()
+    {
+        return $this->erros;
     }
+
+    public function setErros(mixed $erro)
+    {
+        array_push($this->erros, $erro);
+    }
+
+    public function cadastrar(array $parametros) {}
 }
