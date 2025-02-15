@@ -68,4 +68,21 @@ class CursoDAO extends Conexao
         }
     }
 
+    public function listar(): array|bool
+    {
+        try {
+            $sql = "SELECT ID_CURSO, TITULO, DESCRICAO, IMAGEM, 
+                    DATE_FORMAT(DATA_CADASTRO, '%d/%m/%Y') AS DATA_CADASTRO
+                        FROM curso";
+
+            $conexao = Conexao::getInstance();
+            $comando = $conexao->prepare($sql);
+            $comando->execute();
+
+            return $comando->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
 }
