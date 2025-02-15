@@ -59,4 +59,11 @@ class Validacoes
 
         return $arquivo['size'] <= $tamanhoMaximo;
     }
+
+    // remove os caracteres que podem executar um sql injeciton
+    public function removeCaracteresPerigosos(string $campo): string
+    {
+        $campo = preg_replace("/[#!*=+\\/\\-\\;<>?]/", "", $campo);
+        return $campo;
+    }
 }
