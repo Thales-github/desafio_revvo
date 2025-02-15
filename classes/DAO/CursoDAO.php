@@ -27,4 +27,25 @@ class CursoDAO extends Conexao
         }
     }
 
+    public function alterar($dadosAluno): bool
+    {
+        try {
+            $sql = "UPDATE curso SET TITULO = :TITULO, DESCRICAO = :DESCRICAO, IMAGEM = :IMAGEM
+                        WHERE ID_CURSO = :ID_CURSO";
+
+            $conexao = Conexao::getInstance();
+            $comando = $conexao->prepare($sql);
+
+            $comando->bindValue(":ID_CURSO", $dadosAluno["ID_CURSO"]);
+            $comando->bindValue(":TITULO", $dadosAluno["TITULO"]);
+            $comando->bindValue(":DESCRICAO", $dadosAluno["DESCRICAO"]);
+            $comando->bindValue(":IMAGEM", $dadosAluno["IMAGEM"]);
+
+            if ($comando->execute()) return true;
+            return false;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
 }
