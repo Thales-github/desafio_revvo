@@ -1,11 +1,34 @@
 <?php
 
+$pasta = $_SERVER["DOCUMENT_ROOT"] . "/desafio-revvo/";
+require_once($pasta . "classes/DAO/CursoDAO.php");
+
 class Curso
 {
+    private int $idCurso;
     private string $titulo;
     private string $descricao;
     private mixed $imagem;
     private array $erros = [];
+
+    public function getIdCurso()
+    {
+        return $this->idCurso;
+    }
+
+    public function setIdCurso($idCurso)
+    {
+
+        if (
+            !isset($idCurso) ||
+            !is_numeric($idCurso) ||
+            $idCurso <= 0
+        ) {
+            $this->setErros("O CAMPO ID_CURSO NÃO FOI INFORMADO CORRETAMENTE");
+            return false;
+        }
+        $this->idCurso = $idCurso;
+    }
 
     public function getTitulo()
     {
@@ -37,7 +60,12 @@ class Curso
         $this->imagem = $imagem;
     }
 
-    public function getErros()
+    public function getValidacoes()
+    {
+        return new Validacoes();
+    }
+
+    public function getErros(): array
     {
         return $this->erros;
     }
@@ -47,10 +75,58 @@ class Curso
         array_push($this->erros, $erro);
     }
 
-    public function cadastrar(array $parametros) {
+    public function instanciarCurso($parametros, $obrigaId = false)
+    {
+        $camposNecessarios = [
+            "TITULO",
+            "DESCRICAO",
+            "IMAGEM",
+        ];
 
+        if ($obrigaId) $camposNecessarios[] = "ID_CURSO";
 
+        foreach ($camposNecessarios as $key => $value) {
+            if (!isset($parametros[$value])) {
+                $this->setErros("INFORME UM " . $value);
+            }
+        }
 
-        die("chamou o cadastrar");
+        foreach ($parametros as $chave => $valor) {
+
+            $metodoSet = 'set' . str_replace('_', '', ucwords(strtolower($chave), '_'));
+            if (!method_exists($this, $metodoSet)) {
+                continue;
+            }
+            $this->$metodoSet($valor);
+        }
+    }
+
+    public function dadosDoCurso(): array
+    {
+        $vetor = [
+            "TITULO" => $this->getTitulo(),
+            "DESCRICAO" => $this->getDescricao(),
+            "IMAGEM" => $this->getImagem(),
+        ];
+
+        if ($this->getIdCurso() && is_numeric($this->getIdCurso())) {
+            $vetor["ID_CURSO"] = $this->getIdCurso();
+        }
+        return $vetor;
+    }
+
+    public function cadastrar($parametros)
+    {
+        $this->instanciarCurso($parametros);
+        if (!empty($this->getErros())) return $this->getValidacoes()->gerarRetornoHttp(400, $this->getErros(), []);
+
+        $dadosCadastro = $this->dadosDoCurso();
+
+        $cursoDAO = new CursoDAO();
+        $retorno = $cursoDAO->cadastrar($dadosCadastro);
+
+        if ($retorno == false) return $this->getValidacoes()->gerarRetornoHttp(500, ["Erro ao cadastrar curso"], []);
+
+        return $this->getValidacoes()->gerarRetornoHttp(201, ["Sucesso ao cadastrar novo curso"], []);
     }
 }
