@@ -5,11 +5,11 @@ require_once($pasta . "classes/DAO/CursoDAO.php");
 
 class Curso
 {
-    private int $idCurso;
-    private string $titulo;
-    private string $descricao;
-    private mixed $imagem;
-    private array $erros = [];
+    private $idCurso;
+    private $titulo;
+    private $descricao;
+    private $imagem;
+    private $erros = [];
 
     public function getIdCurso()
     {
@@ -80,12 +80,13 @@ class Curso
         $camposNecessarios = [
             "TITULO",
             "DESCRICAO",
-            "IMAGEM",
+            "ARQUIVO",
         ];
 
         if ($obrigaId) $camposNecessarios[] = "ID_CURSO";
 
         foreach ($camposNecessarios as $key => $value) {
+
             if (!isset($parametros[$value])) {
                 $this->setErros("INFORME UM " . $value);
             }
@@ -93,11 +94,18 @@ class Curso
 
         foreach ($parametros as $chave => $valor) {
 
-            $metodoSet = 'set' . str_replace('_', '', ucwords(strtolower($chave), '_'));
-            if (!method_exists($this, $metodoSet)) {
-                continue;
+            if ($chave == "ARQUIVO") {
+            
+                $this->setImagem($valor);
+            }else{
+
+                $metodoSet = 'set' . str_replace('_', '', ucwords(strtolower($chave), '_'));
+                if (!method_exists($this, $metodoSet)) {
+                    continue;
+                }
+                $this->$metodoSet($valor);
             }
-            $this->$metodoSet($valor);
+
         }
     }
 
@@ -106,10 +114,10 @@ class Curso
         $vetor = [
             "TITULO" => $this->getTitulo(),
             "DESCRICAO" => $this->getDescricao(),
-            "IMAGEM" => $this->getImagem(),
+            "ARQUIVO" => $this->getImagem(),
         ];
 
-        if ($this->getIdCurso() && is_numeric($this->getIdCurso())) {
+        if (is_numeric($this->getIdCurso())) {
             $vetor["ID_CURSO"] = $this->getIdCurso();
         }
         return $vetor;

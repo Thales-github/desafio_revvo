@@ -39,7 +39,7 @@ if (isset($_FILES["ARQUIVO"]) && !empty($_FILES["ARQUIVO"])) {
         echo $validacoes->gerarRetornoHttp(400, ["Tamanho do arquivo é inválido, máximo 10MB"], []);
         die();
     }
-
+    $_REQUEST["ARQUIVO"] = $_FILES["ARQUIVO"];
 }
 
 $retorno = $instancia->$metodo($_REQUEST);
