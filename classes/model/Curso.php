@@ -47,5 +47,10 @@ class Curso
         array_push($this->erros, $erro);
     }
 
-    public function cadastrar(array $parametros) {}
+    public function cadastrar(array $parametros) {
+
+
+
+        die("chamou o cadastrar");
+    }
 }
