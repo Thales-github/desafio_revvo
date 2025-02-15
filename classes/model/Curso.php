@@ -158,4 +158,23 @@ class Curso
         $retorno = $this->getValidacoes()->gerarRetornoHttp(200, [], $retorno);
         return $retorno;
     }
+
+    public function alterar($parametros)
+    {
+        $this->instanciarCurso($parametros, true);
+        if (!empty($this->getErros())) return $this->getValidacoes()->gerarRetornoHttp(400, $this->getErros(), []);
+
+        $cursoDAO = new CursoDAO();
+        $cursoExiste = $cursoDAO->detalhar($this->getIdCurso());
+
+        if (!$cursoExiste || empty($cursoExiste)) {
+            return $this->getValidacoes()->gerarRetornoHttp(400, ["Curso informado não existe"], []);
+        }
+
+        $retorno = $cursoDAO->alterar($this->dadosDoCurso());
+
+        if ($retorno === false) return $this->getValidacoes()->gerarRetornoHttp(500, ["Erro ao alterar  dados do curso"], []);
+
+        return $this->getValidacoes()->gerarRetornoHttp(200, ["Sucesso ao alterar dados do curso"], []);
+    }
 }
