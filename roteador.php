@@ -8,7 +8,6 @@ $validacoes = new Validacoes();
 
 $vetor = explode("/", $caminho);
 $classe = $vetor[2];
-$vetor2 = explode("?", $vetor[1]);
 $metodo = $vetor[3];
 
 $caminhoDaClasse = "classes/model/" . $classe . ".php";
@@ -25,7 +24,11 @@ if (!method_exists($instancia, $metodo)) {
     // método chamado não existe, não exibe erro mas não deixa avançar na API
     echo $validacoes->gerarRetornoHttp(401, [], []);
 }
-var_dump();
+
+if ($_FILES["ARQUIVO"]) {
+    $_REQUEST["ARQUIVO"] = $_FILES["ARQUIVO"];
+}
+
 // var_dump($caminhoDaClasse);
 
 die();

@@ -28,4 +28,28 @@ class Validacoes
         ];
         return json_encode($resultado);
     }
+
+    public function validarTipoArquivo($arquivo): bool {
+        // Lista de tipos MIME permitidos
+        $tiposPermitidos = [
+            'application/pdf',               // PDF
+            'application/vnd.ms-excel',       // XLS
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // XLSX
+            'application/msword',             // DOC
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // DOCX
+            'text/plain',                     // TXT
+            'image/png',                      // PNG
+            'image/jpeg',                     // JPEG, JPG
+            'image/pjpeg',                    // JPG/JFIF
+            'image/webp',                     // WEBP
+            'image/jxl',                      // JPEG XL (caso seja necessário)
+        ];
+    
+        // Obtém o tipo real do arquivo
+        $tipoArquivo = mime_content_type($arquivo['tmp_name']);
+    
+        // Verifica se o tipo do arquivo está na lista de permitidos
+        return in_array($tipoArquivo, $tiposPermitidos, true);
+    }
+    
 }
