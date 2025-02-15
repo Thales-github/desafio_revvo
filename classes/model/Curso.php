@@ -114,7 +114,10 @@ class Curso
         $vetor = [
             "TITULO" => $this->getTitulo(),
             "DESCRICAO" => $this->getDescricao(),
-            "ARQUIVO" => $this->getImagem(),
+            "NOME_ARQUIVO" => explode(".",$this->getImagem()["name"])[0],
+            "TAMANHO_ARQUIVO" => $this->getImagem()["size"],
+            "TIPO_ARQUIVO" => $this->getImagem()["type"],
+            "ARQUIVO" => file_get_contents($this->getImagem()["tmp_name"]),
         ];
 
         if (is_numeric($this->getIdCurso())) {
@@ -131,6 +134,9 @@ class Curso
         $dadosCadastro = $this->dadosDoCurso();
 
         $cursoDAO = new CursoDAO();
+
+        // var_dump($dadosCadastro);
+        // die();
         $retorno = $cursoDAO->cadastrar($dadosCadastro);
 
         if ($retorno == false) return $this->getValidacoes()->gerarRetornoHttp(500, ["Erro ao cadastrar curso"], []);

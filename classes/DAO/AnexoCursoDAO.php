@@ -5,22 +5,21 @@ require_once($pasta . "classes/bd/conexao.php");
 
 class AnexoCursoDAO extends Conexao
 {
-    public function cadastrar($dadosAnexo): bool
+
+    public function cadastrar(array $dadosAnexo): bool
     {
         try {
-            $sql = "INSERT INTO anexo_curso (NOME, TIPO, TAMANHO, ARQUIVO)
-                    VALUES (:NOME, :TIPO, :TAMANHO, :ARQUIVO)";
+            $sql = "INSERT INTO anexo_curso (ID_CURSO, NOME, TIPO, TAMANHO, ARQUIVO)
+                    VALUES (:ID_CURSO, :NOME, :TIPO, :TAMANHO, :ARQUIVO)";
 
             $conexao = Conexao::getInstance();
             $comando = $conexao->prepare($sql);
 
-            // Verificando o arquivo e lidando com os dados binários
-            $arquivoBinario = file_get_contents($dadosAnexo["ARQUIVO"]["tmp_name"]);
-
-            $comando->bindValue(":NOME", $dadosAnexo["NOME"]);
-            $comando->bindValue(":TIPO", $dadosAnexo["TIPO"]);
-            $comando->bindValue(":TAMANHO", $dadosAnexo["TAMANHO"]);
-            $comando->bindValue(":ARQUIVO", $arquivoBinario, PDO::PARAM_LOB);
+            $comando->bindValue(":ID_CURSO", $dadosAnexo["ID_CURSO"]);
+            $comando->bindValue(":NOME", $dadosAnexo["NOME_ARQUIVO"]);
+            $comando->bindValue(":TIPO", $dadosAnexo["TIPO_ARQUIVO"]);
+            $comando->bindValue(":TAMANHO", $dadosAnexo["TAMANHO_ARQUIVO"]);
+            $comando->bindValue(":ARQUIVO", $dadosAnexo["ARQUIVO"], PDO::PARAM_LOB);
 
             return $comando->execute();
         } catch (Exception $e) {
@@ -28,33 +27,20 @@ class AnexoCursoDAO extends Conexao
         }
     }
 
-    public function detalhar($idCurso): array|bool
+    public function alterar(array $dadosAnexo): bool
     {
         try {
-            $sql = "SELECT ID_ANEXO_CURSO, NOME, TIPO, TAMANHO, ARQUIVO, 
-                           DATE_FORMAT(DATA_CADASTRO, '%d/%m/%Y') AS DATA_CADASTRO
-                    FROM anexo_curso
-                    WHERE ID__CURSO = :ID__CURSO";
+            $sql = "UPDATE anexo_curso SET NOME = :NOME, TIPO = :TIPO, TAMANHO = :TAMANHO,
+                    ARQUIVO = :ARQUIVO WHERE ID_CURSO = :ID_CURSO";
 
             $conexao = Conexao::getInstance();
             $comando = $conexao->prepare($sql);
-            $comando->bindValue(":ID__CURSO", $idAnexo);
-            $comando->execute();
 
-            return $comando->fetch(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            return false;
-        }
-    }
-
-    public function apagar($idAnexo): bool
-    {
-        try {
-            $sql = "DELETE FROM anexo_curso WHERE ID_ANEXO_CURSO = :ID_ANEXO_CURSO";
-
-            $conexao = Conexao::getInstance();
-            $comando = $conexao->prepare($sql);
-            $comando->bindValue(":ID_ANEXO_CURSO", $idAnexo);
+            $comando->bindValue(":ID_CURSO", $dadosAnexo["ID_CURSO"]);
+            $comando->bindValue(":NOME", $dadosAnexo["NOME_ARQUIVO"]);
+            $comando->bindValue(":TIPO", $dadosAnexo["TIPO_ARQUIVO"]);
+            $comando->bindValue(":TAMANHO", $dadosAnexo["TAMANHO_ARQUIVO"]);
+            $comando->bindValue(":ARQUIVO", $dadosAnexo["ARQUIVO"], PDO::PARAM_LOB);
 
             return $comando->execute();
         } catch (Exception $e) {
