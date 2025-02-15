@@ -117,7 +117,7 @@ class Curso
             "NOME_ARQUIVO" => explode(".",$this->getImagem()["name"])[0],
             "TAMANHO_ARQUIVO" => $this->getImagem()["size"],
             "TIPO_ARQUIVO" => $this->getImagem()["type"],
-            "ARQUIVO" => file_get_contents($this->getImagem()["tmp_name"]),
+            "ARQUIVO" => base64_encode(file_get_contents($this->getImagem()["tmp_name"])),
         ];
 
         if (is_numeric($this->getIdCurso())) {
@@ -135,8 +135,6 @@ class Curso
 
         $cursoDAO = new CursoDAO();
 
-        // var_dump($dadosCadastro);
-        // die();
         $retorno = $cursoDAO->cadastrar($dadosCadastro);
 
         if ($retorno == false) return $this->getValidacoes()->gerarRetornoHttp(500, ["Erro ao cadastrar curso"], []);
@@ -149,10 +147,10 @@ class Curso
 
         $cursoDAO = new CursoDAO();
         $retorno = $cursoDAO->listar();
-        if ($retorno == false) $retorno = [];
+        // var_dump($retorno);
+        // if ($retorno === false || empty($retorno)) $retorno = [];
 
-        $retorno = $this->getValidacoes()->gerarRetornoHttp(200, [], $retorno);
-        return $retorno;
+        return $this->getValidacoes()->gerarRetornoHttp(200, [], $retorno);
     }
 
     public function detalhar($parametros)

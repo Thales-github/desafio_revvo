@@ -109,7 +109,7 @@ class CursoDAO extends Conexao
             $comando = $conexao->prepare($sql);
             $comando->execute();
 
-            return $comando->fetch(PDO::FETCH_ASSOC);
+            return $comando->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             return false;
         }

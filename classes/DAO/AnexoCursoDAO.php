@@ -47,4 +47,19 @@ class AnexoCursoDAO extends Conexao
             return false;
         }
     }
+
+    public function apagar(int $idCurso): bool
+    {
+        try {
+            $sql = "DELETE FROM anexo_curso WHERE ID_CURSO = :ID_CURSO";
+
+            $conexao = Conexao::getInstance();
+            $comando = $conexao->prepare($sql);
+            $comando->bindValue(":ID_CURSO", $idCurso);
+
+            return $comando->execute();
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }
