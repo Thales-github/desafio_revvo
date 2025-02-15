@@ -95,9 +95,9 @@ class Curso
         foreach ($parametros as $chave => $valor) {
 
             if ($chave == "ARQUIVO") {
-            
+
                 $this->setImagem($valor);
-            }else{
+            } else {
 
                 $metodoSet = 'set' . str_replace('_', '', ucwords(strtolower($chave), '_'));
                 if (!method_exists($this, $metodoSet)) {
@@ -105,7 +105,6 @@ class Curso
                 }
                 $this->$metodoSet($valor);
             }
-
         }
     }
 
@@ -114,7 +113,7 @@ class Curso
         $vetor = [
             "TITULO" => $this->getTitulo(),
             "DESCRICAO" => $this->getDescricao(),
-            "NOME_ARQUIVO" => explode(".",$this->getImagem()["name"])[0],
+            "NOME_ARQUIVO" => explode(".", $this->getImagem()["name"])[0],
             "TAMANHO_ARQUIVO" => $this->getImagem()["size"],
             "TIPO_ARQUIVO" => $this->getImagem()["type"],
             "ARQUIVO" => base64_encode(file_get_contents($this->getImagem()["tmp_name"])),
@@ -147,8 +146,8 @@ class Curso
 
         $cursoDAO = new CursoDAO();
         $retorno = $cursoDAO->listar();
-        // var_dump($retorno);
-        // if ($retorno === false || empty($retorno)) $retorno = [];
+
+        if ($retorno === false || empty($retorno)) $retorno = [];
 
         return $this->getValidacoes()->gerarRetornoHttp(200, [], $retorno);
     }
@@ -169,6 +168,26 @@ class Curso
 
         $retorno = $this->getValidacoes()->gerarRetornoHttp(200, [], $retorno);
         return $retorno;
+    }
+
+    public function apagar($parametros)
+    {
+        if (
+            !isset($parametros["ID_CURSO"]) ||
+            !is_numeric($parametros["ID_CURSO"]) ||
+            $parametros["ID_CURSO"] <= 0
+        ) {
+            return $this->getValidacoes()->gerarRetornoHttp(400, ["INFORME UM ID_CURSO VÁLIDO"], []);
+        }
+
+        $cursoDAO = new CursoDAO();
+        $retorno = $cursoDAO->apagar($parametros["ID_CURSO"]);
+
+        if ($retorno == false) {
+            return $this->getValidacoes()->gerarRetornoHttp(500, ["Erro ao apagar o curso"], []);
+        }
+
+        return $this->getValidacoes()->gerarRetornoHttp(200, ["Curso apagado com sucesso"], []);
     }
 
     public function alterar($parametros)
