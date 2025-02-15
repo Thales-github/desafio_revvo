@@ -25,8 +25,13 @@ if (!method_exists($instancia, $metodo)) {
     echo $validacoes->gerarRetornoHttp(401, [], []);
 }
 
-if ($_FILES["ARQUIVO"]) {
-    $_REQUEST["ARQUIVO"] = $_FILES["ARQUIVO"];
+if (isset($_FILES["ARQUIVO"]) && !empty($_FILES["ARQUIVO"])) {
+
+    var_dump($_FILES["ARQUIVO"]);
+    if (!$validacoes->validarTamanhoArquivo($_FILES["ARQUIVO"])) {
+        echo $validacoes->gerarRetornoHttp(400, ["Tipo do arquivo é inválido"], []);
+    }
+    // $_REQUEST["ARQUIVO"] = $_FILES["ARQUIVO"];
 }
 
 // var_dump($caminhoDaClasse);

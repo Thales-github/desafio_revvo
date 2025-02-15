@@ -29,27 +29,35 @@ class Validacoes
         return json_encode($resultado);
     }
 
-    public function validarTipoArquivo($arquivo): bool {
+    // deixei apenas imagem devido a necessidade da aplicação, mas o método é preparado para mais tipos
+    public function validarTipoArquivo($arquivo): bool
+    {
         // Lista de tipos MIME permitidos
         $tiposPermitidos = [
-            'application/pdf',               // PDF
-            'application/vnd.ms-excel',       // XLS
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // XLSX
-            'application/msword',             // DOC
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // DOCX
-            'text/plain',                     // TXT
+            // 'application/pdf',               // PDF
+            // 'application/vnd.ms-excel',       // XLS
+            // 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // XLSX
+            // 'application/msword',             // DOC
+            // 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // DOCX
+            // 'text/plain',                     // TXT
             'image/png',                      // PNG
             'image/jpeg',                     // JPEG, JPG
             'image/pjpeg',                    // JPG/JFIF
             'image/webp',                     // WEBP
-            'image/jxl',                      // JPEG XL (caso seja necessário)
         ];
-    
+
         // Obtém o tipo real do arquivo
         $tipoArquivo = mime_content_type($arquivo['tmp_name']);
-    
+
         // Verifica se o tipo do arquivo está na lista de permitidos
         return in_array($tipoArquivo, $tiposPermitidos, true);
     }
-    
+
+    public function validarTamanhoArquivo($arquivo): bool
+    {
+        // Tamanho máximo permitido em bytes (10MB = 10 * 1024 * 1024)
+        $tamanhoMaximo = 10 * 1024 * 1024;
+
+        return $arquivo['size'] <= $tamanhoMaximo;
+    }
 }
