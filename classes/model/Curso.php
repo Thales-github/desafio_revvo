@@ -140,4 +140,22 @@ class Curso
         $retorno = $this->getValidacoes()->gerarRetornoHttp(200, [], $retorno);
         return $retorno;
     }
+
+    public function detalhar($parametros)
+    {
+        if (
+            !isset($parametros["ID_CURSO"]) ||
+            !is_numeric($parametros["ID_CURSO"]) ||
+            $parametros["ID_CURSO"] <= 0
+        ) {
+            return $this->getValidacoes()->gerarRetornoHttp(400, ["INFORME UM ID_CURSO VÁLIDO"], []);
+        }
+
+        $cursoDAO = new CursoDAO();
+        $retorno = $cursoDAO->detalhar($parametros["ID_CURSO"]);
+        if ($retorno == false) $retorno = [];
+
+        $retorno = $this->getValidacoes()->gerarRetornoHttp(200, [], $retorno);
+        return $retorno;
+    }
 }
