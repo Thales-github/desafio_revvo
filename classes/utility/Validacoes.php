@@ -18,6 +18,7 @@ class Validacoes
         return true;
     }
 
+    // método que realiza os retorno em json da API REST
     public function gerarRetornoHttp(int $codigoHtpp, array $mensagemRetorno, array $dadosRetorno): string
     {
         http_response_code($codigoHtpp);
@@ -46,17 +47,15 @@ class Validacoes
             'image/webp',                     // WEBP
         ];
 
-        // Obtém o tipo real do arquivo
         $tipoArquivo = mime_content_type($arquivo['tmp_name']);
 
-        // Verifica se o tipo do arquivo está na lista de permitidos
         return in_array($tipoArquivo, $tiposPermitidos, true);
     }
 
     public function validarTamanhoArquivo($arquivo): bool
     {
-        // Tamanho máximo permitido em bytes (10MB = 10 * 1024 * 1024)
-        $tamanhoMaximo = 10 * 1024 * 1024;
+        // Tamanho máximo permitido em bytes (8MB = 8 * 1024 * 1024)
+        $tamanhoMaximo = 8 * 1024 * 1024;
 
         return $arquivo['size'] <= $tamanhoMaximo;
     }
