@@ -129,4 +129,15 @@ class Curso
 
         return $this->getValidacoes()->gerarRetornoHttp(201, ["Sucesso ao cadastrar novo curso"], []);
     }
+
+    public function listar($parametros)
+    {
+
+        $cursoDAO = new CursoDAO();
+        $retorno = $cursoDAO->listar();
+        if ($retorno == false) $retorno = [];
+
+        $retorno = $this->getValidacoes()->gerarRetornoHttp(200, [], $retorno);
+        return $retorno;
+    }
 }
