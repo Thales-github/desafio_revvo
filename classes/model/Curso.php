@@ -37,7 +37,14 @@ class Curso
 
     public function setTitulo(mixed $titulo)
     {
-        $this->titulo = $titulo;
+        if (
+            !isset($titulo) ||
+            !$this->getValidacoes()->verificaTamanhoMinimoDeCampo(3, 100, $titulo)
+        ) {
+            $this->setErros("O CAMPO TITULO NÃO FOI INFORMADO CORRETAMENTE");
+            return false;
+        }
+        $this->titulo = mb_strtoupper($this->getValidacoes()->removeCaracteresPerigosos($titulo));
     }
 
     public function getDescricao()
@@ -47,7 +54,14 @@ class Curso
 
     public function setDescricao(mixed $descricao)
     {
-        $this->descricao = $descricao;
+        if (
+            !isset($descricao) ||
+            !$this->getValidacoes()->verificaTamanhoMinimoDeCampo(3, 500, $descricao)
+        ) {
+            $this->setErros("O CAMPO NOME NÃO FOI INFORMADO CORRETAMENTE");
+            return false;
+        }
+        $this->descricao = mb_strtoupper($this->getValidacoes()->removeCaracteresPerigosos($descricao));
     }
 
     public function getImagem()
