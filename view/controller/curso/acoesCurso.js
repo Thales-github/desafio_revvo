@@ -12,7 +12,49 @@ async function cadastrarCurso() {
         });
 
         let respostaApi = await resposta.json(); // Agora está esperando a resposta corretamente
-        let tipoMensagem = resposta.ok ? "success" : "error"; // Apenas um jeito mais limpo de verificar
+        let tipoMensagem = resposta.ok ? "success" : "error"; 
+        let titulo = resposta.ok ? "Sucesso" : "Erro";
+
+        Swal.fire({
+            title: titulo,
+            text: varrerMensagensApi(respostaApi),
+            icon: tipoMensagem
+        });
+
+        manipularModal(`modalCadastrarCurso`, `hide`);
+
+        criarCardDeCurso();
+        criarEventosBaseDeCurso();
+
+        return respostaApi; // Retorna os dados se precisar usar depois
+    } catch (error) {
+
+        Swal.fire({
+            title: "Erro",
+            text: "Não foi possível realizar a operação",
+            icon: "error"
+        });
+
+        return false;
+    }
+}
+
+async function alterarCurso() {
+    
+    try {
+    
+        let formData = new FormData();
+        formData.append("TITULO", document.querySelector("#txtTituloCurso").value);
+        formData.append("DESCRICAO", document.querySelector("#txtDescricaoCurso").value);
+        formData.append("ARQUIVO", document.querySelector("#txtArquivoCurso").files[0]);
+
+        let resposta = await fetch("/desafio-revvo/Curso/alterar", {
+            method: "POST",
+            body: formData
+        });
+
+        let respostaApi = await resposta.json(); // Agora está esperando a resposta corretamente
+        let tipoMensagem = resposta.ok ? "success" : "error"; 
         let titulo = resposta.ok ? "Sucesso" : "Erro";
 
         Swal.fire({
@@ -131,7 +173,16 @@ criarCardDeCurso();
 document.querySelector("#btnSalvarCurso").addEventListener("click", (event) => {
 
     event.preventDefault();
-    cadastrarCurso();
+
+    let tituloModal = document
+        .querySelector(`#modalCadastrarCurso #tituloDoModal`)
+        .textContent == `Cadastrar Curso`;
+
+    if (tituloModal) {
+        cadastrarCurso();
+    } else {
+        alterarCurso();
+    }
 });
 
 criarEventosBaseDeCurso();
