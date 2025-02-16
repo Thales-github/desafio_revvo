@@ -7,10 +7,10 @@ async function listarCurso() {
         }
 
         let cursos = await response.json();
-        
+
         return cursos;
     } catch (error) {
-        return false; 
+        return false;
     }
 }
 
@@ -21,16 +21,24 @@ async function listarCurso() {
  */
 async function detalharCurso(codigoCurso) {
     try {
-        let resposta = await fetch('http://localhost/desafio-revvo/Curso/detalhar');
+        let resposta = await fetch('http://localhost/desafio-revvo/Curso/detalhar',
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ID_CURSO: codigoCurso })
+            }
+        );
 
         if (!resposta.ok) {// http 200 até 299
             throw new Error(`Erro HTTP! Status: ${resposta.status}`);
         }
 
         let data = await resposta.json();
-        
+
         return data; // Retorna os dados se precisar usar depois
     } catch (error) {
+        console.log(error);
+
         return false; // Retorna null em caso de erro
     }
 }
