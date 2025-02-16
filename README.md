@@ -36,5 +36,12 @@ O sistema de roteamento conta com algumas medidas de segurança, como:
 5. A url base para chamar as rotas da API é: `localhost/desafio-revvo/`
 5. Inicie o servidor e comece a usar a API!
 
+## 📖 Funcionalidades
+
+- **CRUD de Cursos**:  
+  Permite criar, listar, atualizar e deletar cursos.
+- **CRUD de Anexos**:  
+  Cada curso pode ter um anexo.
+
 ---
 📌 *Desenvolvido para o desafio Revvo por Thales Vitor Oliveira Cirino*
