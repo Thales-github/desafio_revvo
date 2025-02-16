@@ -60,12 +60,22 @@ function criarCardDeCurso() {
     document.querySelector(".containerCursos").insertAdjacentHTML("afterbegin", botaoCadastrarCurso);
 
     listarCurso().then((listaDeCursos) => {
+        document.querySelector(".containerCursos").innerHTML = "";
 
-        listaDeCursos;
+        listaDeCursos.dados.forEach(registro => {
+
+            let cardCopia = baseParaCardDeCurso;
+
+            cardCopia = cardCopia.replace("BASE64", `data:${registro.TIPO};base64,${registro.ARQUIVO}`);
+            cardCopia = cardCopia.replace("TITULO", registro.TITULO);
+            cardCopia = cardCopia.replace("DESCRICAO", registro.DESCRICAO);
+
+            document.querySelector(".containerCursos").insertAdjacentHTML("afterbegin", cardCopia);
+        });
+
     }).catch(erro => {
         console.error(erro);
     });
-
 
 }
 
