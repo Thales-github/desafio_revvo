@@ -37,21 +37,13 @@
         <button class="btn btn-primary">VER CURSO</button>
     </section>
 
-    <main class="containerCursos mt-4">
+    <main class="mt-4">
+
         <h2 class="mb-3">MEUS CURSOS</h2>
-        <div class="row g-3">
-            <!-- <div class="itemCurso col-md-4">
-                <div class="card cardCurso">
-                    <img src="assets/img/marketing.png" class="card-img-top" alt="Curso">
-                    <div class="card-body">
-                        <h5 class="card-title">PELLENTESQUE MALESUADA</h5>
-                        <p class="card-text">Cum sociis natoque penatibus...</p>
-                        <button class="btn btn-success">VER CURSO</button>
-                    </div>
-                </div>
-            </div> -->
+        <div class="containerCursos row g-3">
 
         </div>
+
     </main>
 
     <footer class="bg-light p-4 mt-5">
