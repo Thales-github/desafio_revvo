@@ -1,6 +1,6 @@
 async function listarCurso() {
     try {
-        let resposta = await fetch('http://localhost/desafio-revvo/Curso/listar');
+        let resposta = await fetch('/desafio-revvo/Curso/listar');
 
         if (!resposta.ok) {// http 200 até 299
             throw new Error(`Erro HTTP! Status: ${resposta.status}`);
@@ -25,7 +25,7 @@ async function detalharCurso(codigoCurso) {
         formData = new FormData();
         formData.append("ID_CURSO", codigoCurso);
 
-        let resposta = await fetch('http://localhost/desafio-revvo/Curso/detalhar',
+        let resposta = await fetch('/desafio-revvo/Curso/detalhar',
             {
                 method: "POST",
                 body: formData
