@@ -21,6 +21,12 @@ async function cadastrarCurso() {
             icon: tipoMensagem
         });
 
+        manipularModal(`modalCadastrarCurso`,`hide`);
+
+        criarCardDeCurso();
+        criarEventosBaseDeCurso();
+
+
         return respostaApi; // Retorna os dados se precisar usar depois
     } catch (error) {
 
@@ -39,6 +45,8 @@ function criarEventosBaseDeCurso() {
     document.querySelector("#btnAbrirModalCurso").addEventListener("click", (event) => {
 
         event.preventDefault();
+
+        limparFormulario(`modalCadastrarCurso`);
         manipularModal("modalCadastrarCurso", "show");
     });
 }
