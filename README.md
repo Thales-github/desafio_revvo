@@ -38,10 +38,19 @@ O sistema de roteamento conta com algumas medidas de segurança, como:
 
 ## 📖 Funcionalidades
 
+
 - **CRUD de Cursos**:  
   Permite criar, listar, atualizar e deletar cursos.
-- **CRUD de Anexos**:  
+- **CRUD de Anexos**:
   Cada curso pode ter um anexo.
+
+- **Front-end**:  
+  Na interface grafica temos os mesmos recursos da API:
+  1. Listar
+  2. Apagar
+  3. Cadastrar
+  4. Atualizar
+  5. Detalhar
 
 ---
 📌 *Desenvolvido para o desafio Revvo por Thales Vitor Oliveira Cirino*
