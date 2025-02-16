@@ -34,7 +34,7 @@ O sistema de roteamento conta com algumas medidas de segurança, como:
 3. Configure a conexão no arquivo de configuração: `classes/bd/conexao.php`
 4. Utilizei no desenvolvimento o Insomnia Rest para testar a api, mas caso o seu cliente http seja outro eu deixei imagens com os exemplos de chamada da api também em `documentacao/api/`
 5. A url base para chamar as rotas da API é: `localhost/desafio-revvo/`
-5. Inicie o servidor e comece a usar a API!
+6. Inicie o servidor e comece a usar a API!
 
 ## 📖 Funcionalidades
 
