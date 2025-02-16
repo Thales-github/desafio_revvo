@@ -11,6 +11,10 @@
 </head>
 
 <body>
+    <?php
+    require_once("assets/modais/modalCadastrarCurso.php");
+    require_once("assets/modais/modalInscrevase.php");
+    ?>
 
     <header class="d-flex justify-content-between align-items-center p-3 bg-light">
         <div class="logo fs-3 fw-bold">LEO</div>
@@ -46,7 +50,7 @@
                     </div>
                 </div>
             </div> -->
-            
+
         </div>
     </main>
 

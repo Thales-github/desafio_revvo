@@ -7,7 +7,7 @@
 function manipularModal(idDoModal, abrirOuFechar) {
 
     // Cria a instância do modal usando o ID fornecido
-    let modal = new bootstrap.Modal(document.getElementById(idDoModal));
+    let modal = new bootstrap.Modal(document.querySelector(`#${idDoModal}`));
 
     if (abrirOuFechar === "show") {
         modal.show(); // Abre o modal

@@ -59,5 +59,6 @@ criarCardDeCurso();
 document.querySelector("#btnAbrirModalCurso").addEventListener("click", (event) => {
 
     event.preventDefault();
-    manipularModal("btnAbrirModalCurso", "show");
+    manipularModal("modalCadastrarCurso", "show");  // Use o ID do modal, não do botão
+
 });
