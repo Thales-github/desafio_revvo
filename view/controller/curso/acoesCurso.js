@@ -82,6 +82,45 @@ async function alterarCurso() {
     }
 }
 
+async function apagarCurso() {
+    try {
+
+        let formData = new FormData();
+        formData.append("ID_CURSO", Number(sessionStorage.getItem(`codigoCurso`)));
+        
+        let resposta = await fetch("/desafio-revvo/Curso/apagar", {
+            method: "POST",
+            body: formData
+        });
+
+        let respostaApi = await resposta.json(); // Agora está esperando a resposta corretamente
+        let tipoMensagem = resposta.ok ? "success" : "error";
+        let titulo = resposta.ok ? "Sucesso" : "Erro";
+
+        Swal.fire({
+            title: titulo,
+            text: varrerMensagensApi(respostaApi),
+            icon: tipoMensagem
+        });
+
+        manipularModal(`modalCadastrarCurso`, `hide`);
+
+        criarCardDeCurso();
+        criarEventosBaseDeCurso();
+
+        return respostaApi; // Retorna os dados se precisar usar depois
+    } catch (error) {
+
+        Swal.fire({
+            title: "Erro",
+            text: "Não foi possível realizar a operação",
+            icon: "error"
+        });
+
+        return false;
+    }
+}
+
 function criarClickDetalharCurso() {
 
     document.querySelectorAll(".btnDetalharCurso").forEach(botao => {
@@ -185,6 +224,13 @@ document.querySelector("#btnSalvarCurso").addEventListener("click", (event) => {
     } else {
         alterarCurso();
     }
+});
+
+document.querySelector("#btnApagarCurso").addEventListener("click", (event) => {
+
+    event.preventDefault();
+
+    apagarCurso();
 });
 
 criarEventosBaseDeCurso();
