@@ -33,10 +33,10 @@
         <button class="btn btn-primary">VER CURSO</button>
     </section>
 
-    <main class="container mt-4">
+    <main class="containerCursos mt-4">
         <h2 class="mb-3">MEUS CURSOS</h2>
         <div class="row g-3">
-            <div class="col-md-4">
+            <!-- <div class="itemCurso col-md-4">
                 <div class="card cardCurso">
                     <img src="assets/img/marketing.png" class="card-img-top" alt="Curso">
                     <div class="card-body">
@@ -45,13 +45,8 @@
                         <button class="btn btn-success">VER CURSO</button>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card d-flex flex-column justify-content-center align-items-center border border-secondary rounded" style="height: 100%;">
-                    <i class="bi bi-plus-circle fs-1 text-muted"></i>
-                    <span class="text-muted mt-2">ADICIONAR CURSO</span>
-                </div>
-            </div>
+            </div> -->
+            
         </div>
     </main>
 
@@ -79,6 +74,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/js/manipularModal.js"></script>
     <script src="assets/js/varrerMensagensApi.js"></script>
     <script src="controller/curso/listarCurso.js"></script>
     <script src="controller/curso/acoesCurso.js"></script>

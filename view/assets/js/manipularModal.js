@@ -1,10 +1,17 @@
-// Função para abrir o modal
+
 /**
- * @param {string} idDoModal 
- * @param {boolean} abrirOuFechar show/hide
+ * Função para manipular a abertura ou fechamento do modal.
+ * @param {string} idDoModal - ID do modal (sem o "#").
+ * @param {string} abrirOuFechar - 'show' para abrir o modal, 'hide' para fechar.
  */
 function manipularModal(idDoModal, abrirOuFechar) {
-    
-    let modal = new bootstrap.Modal(document.getElementById(`${idDoModal}`));
-    modal.abrirOuFechar();
+
+    // Cria a instância do modal usando o ID fornecido
+    let modal = new bootstrap.Modal(document.getElementById(idDoModal));
+
+    if (abrirOuFechar === "show") {
+        modal.show(); // Abre o modal
+    } else {
+        modal.hide(); // Fecha o modal
+    }
 }

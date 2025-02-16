@@ -1,3 +1,4 @@
+
 async function cadastrarCurso() {
 
     try {
@@ -39,3 +40,24 @@ async function cadastrarCurso() {
         return false;
     }
 }
+
+function criarCardDeCurso() {
+
+    let botaoCadastrarCurso = `
+            <div id="btnAbrirModalCurso" class="col-md-4">
+                <div class="card d-flex flex-column justify-content-center align-items-center border border-secondary rounded" style="height: 100%;">
+                    <i class="bi bi-plus-circle fs-1 text-muted"></i>
+                    <span class="text-muted mt-2">ADICIONAR CURSO</span>
+                </div>
+            </div>
+    `;
+
+    document.querySelector(".containerCursos").insertAdjacentHTML("afterbegin", botaoCadastrarCurso);
+}
+
+criarCardDeCurso();
+document.querySelector("#btnAbrirModalCurso").addEventListener("click", (event) => {
+
+    event.preventDefault();
+    manipularModal("btnAbrirModalCurso", "show");
+});
