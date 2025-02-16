@@ -34,7 +34,7 @@
     <section class="banner text-white text-center p-5 bg-dark">
         <h2>LOREM IPSUM</h2>
         <p>Aenean lacinia bibendum nulla sed consectetur...</p>
-        <button class="btn btn-primary">VER CURSO</button>
+        <button class="btnDetalharCurso btn btn-primary">VER CURSO</button>
     </section>
 
     <main class="mt-4">

@@ -1,4 +1,14 @@
 img{
     max-height: 200px;
-    max-width: 500px;
+    max-width: 400px;
+}
+
+.cardCurso, #btnAbrirModalCurso{
+    max-height: 600px;
+    max-width: 400px;
+}
+
+#btnAbrirModalCurso{
+    height: 300px;
+    width: 400px;
 }

@@ -34,6 +34,15 @@ async function cadastrarCurso() {
     }
 }
 
+function criarEventosBaseDeCurso() {
+
+    document.querySelector("#btnAbrirModalCurso").addEventListener("click", (event) => {
+
+        event.preventDefault();
+        manipularModal("modalCadastrarCurso", "show");
+    });
+}
+
 function criarCardDeCurso() {
 
     let baseParaCardDeCurso = `
@@ -58,10 +67,14 @@ function criarCardDeCurso() {
     `;
 
     document.querySelector(".containerCursos").insertAdjacentHTML("afterbegin", botaoCadastrarCurso);
+    criarEventosBaseDeCurso();
 
     listarCurso().then((listaDeCursos) => {
         document.querySelector(".containerCursos").innerHTML = "";
 
+        document.querySelector(".containerCursos").insertAdjacentHTML("afterbegin", botaoCadastrarCurso);
+        criarEventosBaseDeCurso();
+        
         listaDeCursos.dados.forEach(registro => {
 
             let cardCopia = baseParaCardDeCurso;
@@ -71,20 +84,17 @@ function criarCardDeCurso() {
             cardCopia = cardCopia.replace("DESCRICAO", registro.DESCRICAO);
 
             document.querySelector(".containerCursos").insertAdjacentHTML("afterbegin", cardCopia);
+
         });
 
     }).catch(erro => {
-        console.error(erro);
+        // console.error(erro);
     });
 
 }
 
 criarCardDeCurso();
-document.querySelector("#btnAbrirModalCurso").addEventListener("click", (event) => {
 
-    event.preventDefault();
-    manipularModal("modalCadastrarCurso", "show");
-});
 
 document.querySelector("#btnSalvarCurso").addEventListener("click", (event) => {
 
