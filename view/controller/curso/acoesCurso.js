@@ -87,7 +87,7 @@ async function apagarCurso() {
 
         let formData = new FormData();
         formData.append("ID_CURSO", Number(sessionStorage.getItem(`codigoCurso`)));
-        
+
         let resposta = await fetch("/desafio-revvo/Curso/apagar", {
             method: "POST",
             body: formData
@@ -229,8 +229,12 @@ document.querySelector("#btnSalvarCurso").addEventListener("click", (event) => {
 document.querySelector("#btnApagarCurso").addEventListener("click", (event) => {
 
     event.preventDefault();
-
     apagarCurso();
 });
 
 criarEventosBaseDeCurso();
+
+if (!localStorage.getItem('modalExibido') || isNaN(localStorage.getItem('modalExibido'))) {
+    manipularModal('modalInscrevase', 'show');
+    localStorage.setItem(`modalExibido`, 1);
+}
