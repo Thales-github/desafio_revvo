@@ -39,6 +39,30 @@ async function cadastrarCurso() {
     }
 }
 
+function criarClickDetalharCurso() {
+
+    document.querySelectorAll(".btnDetalharCurso").forEach(botao => {
+
+        botao.addEventListener("click", (event) => {
+
+            event.preventDefault();
+
+            document.querySelector(`#modalCadastrarCurso #tituloDoModal`).textContent = `Alterar Curso`;
+            limparFormulario(`modalCadastrarCurso`);
+            manipularModal("modalCadastrarCurso", "show");
+
+            let card = botao.parentElement.parentElement.parentElement;
+
+            detalharCurso(card.dataset.idCurso).then((dadosDoCurso) => {
+
+                document.querySelector(`#txtTituloCurso`).value = dadosDoCurso.dados.TITULO;
+                document.querySelector(`#txtDescricaoCurso`).value = dadosDoCurso.dados.DESCRICAO;
+
+            });
+        });
+    });
+}
+
 function criarEventosBaseDeCurso() {
 
     document.querySelector("#btnAbrirModalCurso").addEventListener("click", (event) => {
@@ -95,25 +119,7 @@ function criarCardDeCurso() {
 
         });
 
-        document.querySelectorAll(".btnDetalharCurso").forEach(botao => {
-
-            botao.addEventListener("click", (event) => {
-
-                event.preventDefault();
-
-                document.querySelector(`#modalCadastrarCurso #tituloDoModal`).textContent = `Alterar Curso`;
-                limparFormulario(`modalCadastrarCurso`);
-                manipularModal("modalCadastrarCurso", "show");
-
-                let card = botao.parentElement.parentElement.parentElement;
-
-                detalharCurso(card.dataset.idCurso).then((dadosDoCurso) => {
-
-                    console.log(dadosDoCurso);
-
-                });
-            });
-        });
+        criarClickDetalharCurso();
 
     }).catch(erro => {
         return false;
