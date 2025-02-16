@@ -23,7 +23,7 @@ async function cadastrarCurso() {
 
         return respostaApi; // Retorna os dados se precisar usar depois
     } catch (error) {
-        
+
         Swal.fire({
             title: "Erro",
             text: "Não foi possível realizar a operação",
@@ -41,15 +41,15 @@ function criarCardDeCurso() {
             <div class="card cardCurso">
                 <img src="BASE64" class="card-img-top" alt="Curso">
                 <div class="card-body">
-                    <h5 class="card-title">PELLENTESQUE MALESUADA</h5>
-                    <p class="card-text">Cum sociis natoque penatibus...</p>
+                    <h5 class="card-title">TITULO</h5>
+                    <p class="card-text">DESCRICAO</p>
                     <button class="btn btn-success">VER CURSO</button>
                 </div>
             </div>
         </div>`;
 
     let botaoCadastrarCurso = `
-            <div style="cursor: pointer" id="btnAbrirModalCurso" class="col-md-4">
+            <div style="cursor: pointer;" id="btnAbrirModalCurso" class="col-md-4">
                 <div class="card d-flex flex-column justify-content-center align-items-center border border-secondary rounded" style="height: 100%;">
                     <i class="bi bi-plus-circle fs-1 text-muted"></i>
                     <span class="text-muted mt-2">ADICIONAR CURSO</span>
@@ -58,6 +58,14 @@ function criarCardDeCurso() {
     `;
 
     document.querySelector(".containerCursos").insertAdjacentHTML("afterbegin", botaoCadastrarCurso);
+
+    listarCurso().then((listaDeCursos) => {
+
+        listaDeCursos;
+    }).catch(erro => {
+        console.error(erro);
+    });
+
 
 }
 

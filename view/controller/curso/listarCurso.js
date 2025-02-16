@@ -6,7 +6,7 @@ async function listarCurso() {
             throw new Error(`Erro HTTP! Status: ${resposta.status}`);
         }
 
-        let cursos = await response.json();
+        let cursos = await resposta.json();
 
         return cursos;
     } catch (error) {
