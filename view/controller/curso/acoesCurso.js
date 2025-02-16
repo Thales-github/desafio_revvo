@@ -21,11 +21,10 @@ async function cadastrarCurso() {
             icon: tipoMensagem
         });
 
-        manipularModal(`modalCadastrarCurso`,`hide`);
+        manipularModal(`modalCadastrarCurso`, `hide`);
 
         criarCardDeCurso();
         criarEventosBaseDeCurso();
-
 
         return respostaApi; // Retorna os dados se precisar usar depois
     } catch (error) {
@@ -46,6 +45,7 @@ function criarEventosBaseDeCurso() {
 
         event.preventDefault();
 
+        document.querySelector(`#modalCadastrarCurso #tituloDoModal`).textContent = `Cadastrar Curso`;
         limparFormulario(`modalCadastrarCurso`);
         manipularModal("modalCadastrarCurso", "show");
     });
@@ -54,13 +54,13 @@ function criarEventosBaseDeCurso() {
 function criarCardDeCurso() {
 
     let baseParaCardDeCurso = `
-        <div class="itemCurso col-md-4">
+        <div class="itemCurso col-md-4" data-id-curso="ID_CURSO">
             <div class="card cardCurso">
                 <img src="BASE64" class="card-img-top" alt="Curso">
                 <div class="card-body">
                     <h5 class="card-title">TITULO</h5>
                     <p class="card-text">DESCRICAO</p>
-                    <button class="btn btn-success">VER CURSO</button>
+                    <button class="btnDetalharCurso btn btn-success">VER CURSO</button>
                 </div>
             </div>
         </div>`;
@@ -82,30 +82,50 @@ function criarCardDeCurso() {
 
         document.querySelector(".containerCursos").insertAdjacentHTML("afterbegin", botaoCadastrarCurso);
         criarEventosBaseDeCurso();
-        
+
         listaDeCursos.dados.forEach(registro => {
 
             let cardCopia = baseParaCardDeCurso;
-
-            cardCopia = cardCopia.replace("BASE64", `data:${registro.TIPO};base64,${registro.ARQUIVO}`);
+            cardCopia = cardCopia.replace("ID_CURSO", `${registro.ID_CURSO}`);
             cardCopia = cardCopia.replace("TITULO", registro.TITULO);
             cardCopia = cardCopia.replace("DESCRICAO", registro.DESCRICAO);
+            cardCopia = cardCopia.replace("BASE64", `data:${registro.TIPO};base64,${registro.ARQUIVO}`);
 
             document.querySelector(".containerCursos").insertAdjacentHTML("afterbegin", cardCopia);
 
         });
 
+        document.querySelectorAll(".btnDetalharCurso").forEach(botao => {
+
+            botao.addEventListener("click", (event) => {
+
+                event.preventDefault();
+
+                document.querySelector(`#modalCadastrarCurso #tituloDoModal`).textContent = `Alterar Curso`;
+                limparFormulario(`modalCadastrarCurso`);
+                manipularModal("modalCadastrarCurso", "show");
+
+                let card = botao.parentElement.parentElement.parentElement;
+
+                detalharCurso(card.dataset.idCurso).then((dadosDoCurso) => {
+
+                    console.log(dadosDoCurso);
+
+                });
+            });
+        });
+
     }).catch(erro => {
-        // console.error(erro);
+        return false;
     });
 
 }
-
 criarCardDeCurso();
-
 
 document.querySelector("#btnSalvarCurso").addEventListener("click", (event) => {
 
     event.preventDefault();
     cadastrarCurso();
 });
+
+criarEventosBaseDeCurso();
