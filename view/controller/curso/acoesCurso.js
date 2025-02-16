@@ -10,9 +10,19 @@ async function cadastrarCurso() {
         cadastrarCurso = fetch("http://localhost/desafio-revvo/Curso/cadastrar",
             {
                 method: "POST",
-                body: 
+                body: formData
             }
         );
+
+        
+        if (!resposta.ok) {// http 200 até 299
+            throw new Error(`Erro HTTP! Status: ${resposta.status}`);
+        }
+
+        let data = await resposta.json();
+
+        return data; // Retorna os dados se precisar usar depois
+        
 
     } catch (error) {
         return false;
