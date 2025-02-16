@@ -12,7 +12,7 @@ async function cadastrarCurso() {
         });
 
         let respostaApi = await resposta.json(); // Agora está esperando a resposta corretamente
-        let tipoMensagem = resposta.ok ? "success" : "error"; 
+        let tipoMensagem = resposta.ok ? "success" : "error";
         let titulo = resposta.ok ? "Sucesso" : "Erro";
 
         Swal.fire({
@@ -40,10 +40,11 @@ async function cadastrarCurso() {
 }
 
 async function alterarCurso() {
-    
+
     try {
-    
+
         let formData = new FormData();
+        formData.append("ID_CURSO", Number(sessionStorage.getItem(`codigoCurso`)));
         formData.append("TITULO", document.querySelector("#txtTituloCurso").value);
         formData.append("DESCRICAO", document.querySelector("#txtDescricaoCurso").value);
         formData.append("ARQUIVO", document.querySelector("#txtArquivoCurso").files[0]);
@@ -54,7 +55,7 @@ async function alterarCurso() {
         });
 
         let respostaApi = await resposta.json(); // Agora está esperando a resposta corretamente
-        let tipoMensagem = resposta.ok ? "success" : "error"; 
+        let tipoMensagem = resposta.ok ? "success" : "error";
         let titulo = resposta.ok ? "Sucesso" : "Erro";
 
         Swal.fire({
@@ -99,6 +100,7 @@ function criarClickDetalharCurso() {
 
                 document.querySelector(`#txtTituloCurso`).value = dadosDoCurso.dados.TITULO;
                 document.querySelector(`#txtDescricaoCurso`).value = dadosDoCurso.dados.DESCRICAO;
+                sessionStorage.setItem(`codigoCurso`, card.dataset.idCurso);
 
             });
         });
